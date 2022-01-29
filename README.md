@@ -1,8 +1,4 @@
-# tienda online 2.0 (tienda)
-
-http://soyanderson.com/#/
-
-la version actualizada de la anterior version de la tienda online
+# peliculas
 
 ## Install the dependencies
 ```bash
