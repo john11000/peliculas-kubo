@@ -59,6 +59,7 @@
               />
               <q-btn
                 label="iniciar session"
+                @click="$router.replace(`/login`)"
                 type="submit"
                 color="primary"
                 v-if="!user"
@@ -189,9 +190,7 @@ export default defineComponent({
     this.myCalifiacion  = this.myCalifiacion[0].calififacion
     this.ratingModel = this.pelicula.calificacion;
     console.log(this.pelicula);
-    if (this.$store.state.movie.nombre == "jhon") {
-      window.location.href = "#/";
-    }
+   
   },
     momento: function (fecha) {
       return moment(fecha).fromNow();
