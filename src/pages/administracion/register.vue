@@ -95,7 +95,7 @@ export default {
           
 
           (async () => {
-            const res = await axios.post("https://b-peliculas.herokuapp.com/users/register", {
+            const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/register", {
               username: name.value,
               password: pass.value,
               rol: "c",

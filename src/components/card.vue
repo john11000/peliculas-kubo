@@ -12,10 +12,10 @@
     <q-card class="my-card q-ma-sm bg-dark text-white">
       <!-- <q-video :src="prop.trailer.replace(`watch?v=`,`embed/`).split(`&`)[0]" /> -->
       <q-img
-        :src="`https://b-peliculas.herokuapp.com/img/` + prop.caratula"
+        :src='"https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/img/"+prop.caratula'
         :ratio="4 / 3"
         width="20"
-        loading="lazy"
+    
       />
 
       <q-card-section style="height: 150px; overflow: hidden">
@@ -62,6 +62,7 @@ export default {
       let falta = diff / (1000 * 60 * 60 * 24*7) 
       return falta <= 21 &&  falta >= 0 ;
     },
+    log:function (msg){console.log(msg)}
   },
   props: ["prop"],
   components: {

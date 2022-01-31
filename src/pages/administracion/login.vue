@@ -87,17 +87,27 @@ export default {
           });
         } else {
           (async () => {
-               let body = {
+            let body = {
               username: name.value,
               password: pass.value,
               rol: "c",
               randid: localStorage.getItem("randid"),
             };
-            const res = await axios.post("https://b-peliculas.herokuapp.com/users/", {
-              data :body
-            });
-         console.log(res)
-      
+            const res = await axios(
+              "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/",
+              {
+                method: "post",
+                data: body,
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Content-Type": "application/json",
+                  "Access-Control-Allow-Methods":
+                    "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                },
+              }
+            );
+            console.log(res);
+
             if (res.data.estado === 1) {
               localStorage.setItem("token", res.data.token);
               window.location.href = "#/administracion/panel";

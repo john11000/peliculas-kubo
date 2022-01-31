@@ -7,7 +7,7 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://b-peliculas.herokuapp.com/' })
+const api = axios.create({ baseURL: 'https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/' })
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

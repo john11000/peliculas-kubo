@@ -220,9 +220,9 @@ export default {
   beforeCreate: async function () {
     auth(this.$route.fullPath);
 
-      const res = await axios.get("https://b-peliculas.herokuapp.com/movies/categorias")
+      const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias")
     this.links1 = res.data.categorias
-     const res2 = await axios.get("https://b-peliculas.herokuapp.com/");
+     const res2 = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
     this.busqueda = res2.data.categorias;
   },methods:{
       salir:function (){
