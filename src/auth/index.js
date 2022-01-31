@@ -3,7 +3,7 @@ const baseUrl = "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/
 
 const auth =  async(path = "", $store) => {
   if (localStorage.getItem("token")) {
-      const res =  await axios.get( baseUrl + "users/",   {headers: { token :  localStorage.getItem("token")}})
+      const res =  await axios.get( baseUrl + "users/",   {headers: { token :  localStorage.getItem("token") ,"Access-Control-Allow-Origin": "*"}})
     if(!localStorage.getItem("usuario")){
         localStorage.setItem("usuario",JSON.stringify(res.data.usuario) )
     }

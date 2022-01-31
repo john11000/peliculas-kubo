@@ -83,7 +83,9 @@ export default {
           });
         } else {
           (async () => {
-            const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/", {
+            const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/",headers: {
+    "Access-Control-Allow-Origin": "*"
+  }, {
               username: name.value,
               password: pass.value,
               rol: "c",
