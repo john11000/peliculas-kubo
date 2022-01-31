@@ -4,10 +4,11 @@ import axios from "axios";
 export default function () {
   
   return {
-    nombre : "jhon anderson",
+    nombre: localStorage.getItem("token") ? localStorage.getItem("usuario") : null,
+    token : localStorage.getItem("token") ? localStorage.getItem("token") : null,
     data: (async()=>{
-        const res = await axios.get("api/productos.json");
-        return res.data.productosTotal;
+        const res = await axios.get("http://localhost:5000/");
+        return res.data;
     })()
   }
 }

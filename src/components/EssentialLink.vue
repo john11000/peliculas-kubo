@@ -4,17 +4,17 @@
     clickable
     tag="a"
     target="_self"
-    :href="link"
+    :href="id_categoria === 1 ? `#/`:`#/categoria/`+id_categoria"
   >
     <q-item-section
-      v-if="icon"
+    
       avatar
     >
-      <q-icon :name="icon" />
+      <q-icon name="slideshow" />
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
+      <q-item-label>{{ nombre_categoria }}</q-item-label>
       <q-item-label caption>
       </q-item-label>
     </q-item-section>
@@ -27,24 +27,14 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'EssentialLink',
   props: {
-    title: {
+    nombre_categoria: {
       type: String,
       required: true
     },
 
-    caption: {
-      type: String,
-      default: ''
-    },
 
-    link: {
-      type: String,
+    id_categoria: {
       default: '#'
-    },
-
-    icon: {
-      type: String,
-      default: ''
     }
   }
 })

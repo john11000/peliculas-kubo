@@ -61,7 +61,7 @@
                 class="item-hover overflow-hidden"
                 @click="link(resultados.url)"
               >
-                <div class="item-texto">{{ resultados.name }}</div>
+                <div class="item-texto">{{ resultados.nombre_categoria }}</div>
               </div>
             </div>
           </q-input>
@@ -70,14 +70,29 @@
     </q-header>
     <hr />
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="text-white bg-dark">
+    <q-drawer
+      v-model="leftDrawerOpen"
+      behavior="mobile"
+      show-if-above
+      bordered
+      class="text-white bg-dark"
+    >
       <q-list>
-       <div class="text-center"> <q-btn color="black" @click="link(`#/login`)" class="q-ma-sm" label="iniciar session"></q-btn></div>
-        <q-item-label class="text-white bg-dark" header> Categorias</q-item-label>
+        <div class="text-center">
+          <q-btn
+            color="black"
+            @click="link(`#/login`)"
+            class="q-ma-sm"
+            label="iniciar session"
+          ></q-btn>
+        </div>
+        <q-item-label class="text-white bg-dark" header>
+          Categorias</q-item-label
+        >
 
         <EssentialLink
           v-for="link in essentialLinks"
-          :key="link.title"
+          :key="link"
           v-bind="link"
           target="_self"
           class="text-white bg-dark"
@@ -85,7 +100,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container style="overflow: hidden">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -95,107 +110,126 @@
 import EssentialLink from "components/EssentialLink.vue";
 import axios from "axios";
 
-const linksList = [
-  {
-    title: "Inicio",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "#/",
-  },
-  {
-    title: "Alimentación y bebidas",
-    caption: "quasar.dev",
-    icon: "liquor",
-    link: "#/bebidas",
-  },
-  {
-    title: "Belleza",
-    caption: "quasar.dev",
-    icon: "face",
-    link: "#/belleza",
-  },
-  {
-    title: " Coche y Moto",
-    caption: "quasar.dev",
-    icon: "pedal_bike",
-    link: "#/Coche",
-  },
+// const linksList = [
+//   {
+//     title: "Inicio",
+//     caption: "quasar.dev",
+//     icon: "border_all",
+//     link: "#/",
+//   },
+//   {
+//     title: "Acción",
+//     caption: "quasar.dev",
+//     icon: "liquor",
+//     link: "#/Acción",
+//   },
+//   {
+//     title: "Ciencia Ficción",
+//     caption: "quasar.dev",
+//     icon: "face",
+//     link: "#/Ciencia Ficción",
+//   },
+//   {
+//     title: "Comedia",
+//     caption: "quasar.dev",
+//     icon: "pedal_bike",
+//     link: "#/Comedia",
+//   },
 
-  {
-    title: "Deportes y aire libre",
-    caption: "quasar.dev",
-    icon: "pool",
-    link: "#/deporte",
-  },
+//   {
+//     title: "Películas actuales",
+//     caption: "quasar.dev",
+//     icon: "pool",
+//     link: "#/documental",
+//   },
 
-  {
-    title: "Electrónica",
-    caption: "quasar.dev",
-    icon: "computer",
-    link: "#/electronica",
-  },
+//   {
+//     title: "Fantasía",
+//     caption: "quasar.dev",
+//     icon: "computer",
+//     link: "#/Fantasía",
+//   },
 
-  {
-    title: "Hogar y cocina",
-    caption: "quasar.dev",
-    icon: "kitchen",
-    link: "#/hogar",
-  },
-  {
-    title: "Iluminación",
-    caption: "quasar.dev",
-    icon: "emoji_objects",
-    link: "#/iluminacion",
-  },
-  {
-    title: "Informática",
-    caption: "quasar.dev",
-    icon: "settings_ethernet",
-    link: "#/informatica",
-  },
-  {
-    title: "Instrumentos musicales",
-    caption: "quasar.dev",
-    icon: "music_note",
-    link: "#/musica",
-  },
-  {
-    title: "Juguetes y juegos",
-    caption: "quasar.dev",
-    icon: "smart_toy",
-    link: "#/juegos",
-  },
-  {
-    title: "Joyerías",
-    caption: "quasar.dev",
-    icon: "fitbit",
-    link: "#/joyerias",
-  },
-  {
-    title: "Libros",
-    caption: "quasar.dev",
-    icon: "menu_book",
-    link: "#/libros",
-  },
-  {
-    title: "Productos para mascotas",
-    caption: "quasar.dev",
-    icon: "pets",
-    link: "#/mascotas",
-  },
-  {
-    title: "Ropa y accesorios",
-    caption: "quasar.dev",
-    icon: "checkroom",
-    link: "#/ropa",
-  },
-  {
-    title: "Software",
-    caption: "quasar.dev",
-    icon: "data_object",
-    link: "#/software",
-  },
-];
+//   {
+//     title: "Musical",
+//     caption: "quasar.dev",
+//     icon: "kitchen",
+//     link: "#/Musical",
+//   },
+//   {
+//     title: "Películas antiguas",
+//     caption: "quasar.dev",
+//     icon: "emoji_objects",
+//     link: "#/Películas antiguas",
+//   },
+//   {
+//     title: "Informática",
+//     caption: "quasar.dev",
+//     icon: "settings_ethernet",
+//     link: "#/informatica",
+//   },
+//   {
+//     title: "Estrenos",
+//     caption: "quasar.dev",
+//     icon: "music_note",
+//     link: "#/musica",
+//   },
+//   {
+//     title: "Clásicos",
+//     caption: "quasar.dev",
+//     icon: "smart_toy",
+//     link: "#/juegos",
+//   },
+//   {
+//     title: "Mudas",
+//     caption: "quasar.dev",
+//     icon: "fitbit",
+//     link: "#/joyerias",
+//   },
+//   {
+//     title: "Películas en blanco y negro",
+//     caption: "quasar.dev",
+//     icon: "menu_book",
+//     link: "#/libros",
+//   },
+//   {
+//     title: "Películas en blanco y negro",
+//     caption: "quasar.dev",
+//     icon: "pets",
+//     link: "#/mascotas",
+//   },
+//   {
+//     title: "Ropa y accesorios",
+//     caption: "quasar.dev",
+//     icon: "checkroom",
+//     link: "#/ropa",
+//   },
+//   {
+//     title: "aventuras",
+//     caption: "quasar.dev",
+//     icon: "data_object",
+//     link: "#/software",
+//   },
+//   {
+//     title: "Dramáticas",
+//     caption: "quasar.dev",
+//     icon: "data_object",
+//     link: "#/Dramáticas",
+//   },
+//   {
+//     title: "terror",
+//     caption: "quasar.dev",
+//     icon: "data_object",
+//     link: "#/terror",
+//   },
+//   {
+//     title: "Infantiles",
+//     caption: "quasar.dev",
+//     icon: "data_object",
+//     link: "#/Infantiles",
+//   },
+// ];
+
 
 import { defineComponent, ref } from "vue";
 
@@ -205,30 +239,11 @@ export default defineComponent({
   components: {
     EssentialLink,
   },
-  beforeCreate: async function () {
-    const res = await axios.get("api/productos.json");
-    this.busqueda = res.data.productosTotal;
-  },
-  methods: {
-    link: function (l) {
-      window.open(l);
-    },
-    filtrar: function () {
-      if (this.ph == "") {
-        this.busqueda_datos = [];
-      } else {
-        this.busqueda_datos = this.busqueda;
-        this.busqueda_datos = this.busqueda_datos.filter((b) =>
-          b.name.toLowerCase().includes(this.ph.toLowerCase())
-        );
-      }
-    },
-  },
-  setup() {
+   setup() {
     const leftDrawerOpen = ref(false);
 
     return {
-      essentialLinks: linksList,
+      essentialLinks: [],
       leftDrawerOpen,
       searchModel: "",
       busqueda_datos: [],
@@ -240,6 +255,27 @@ export default defineComponent({
       },
     };
   },
+  beforeCreate: async function () {
+    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias");
+    this.busqueda = res.data.categorias;
+    this.essentialLinks = res.data.categorias
+  },
+  methods: {
+    link: function (l) {
+      window.location.href = l;
+    },
+    filtrar: function () {
+      if (this.ph == "") {
+        this.busqueda_datos = [];
+      } else {
+        this.busqueda_datos = this.busqueda;
+        this.busqueda_datos = this.busqueda_datos.filter((b) =>
+          b.nombre_categoria.toLowerCase().includes(this.ph.toLowerCase())
+        );
+      }
+    },
+  },
+ 
 });
 </script>
 

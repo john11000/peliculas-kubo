@@ -5,7 +5,7 @@
       style="width: 400px"
     >
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-    
+
         <h6 class="text-uppercase text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@
         </h6>
         <q-input
           filled
-          v-model="name"
+          v-model.trim="name"
           label="Your username *"
           title="please, put your username to log in"
           lazy-rules
@@ -35,13 +35,12 @@
         <q-input
           filled
           type="password"
-          v-model="pass"
+          v-model.trim="pass"
           label="Your password *"
           lazy-rules
           :rules="[
             (val) =>
               (val !== null && val !== '') || 'Please put your password ',
-
           ]"
         />
 
@@ -50,6 +49,8 @@
         <div class="text-center">
           <q-btn label="Login" type="submit" color="primary" />
         </div>
+            <q-btn @click="$router.replace(`/register`)" flat rounded color="primary" label="no tengo una cuenta" />
+
       </q-form>
     </div>
   </div>
@@ -58,11 +59,11 @@
 <script>
 import { useQuasar } from "quasar";
 import { ref } from "vue";
-
+import axios from "axios";
+import  auth  from "src/auth/index"
 export default {
   setup() {
     const $q = useQuasar();
-
     const name = ref(null);
     const pass = ref(null);
     const accept = ref(false);
@@ -73,12 +74,6 @@ export default {
       accept,
 
       onSubmit() {
-            $q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "cloud_done",
-            message: "Submitted",
-          });
         if (accept.value !== true) {
           $q.notify({
             color: "red-5",
@@ -87,12 +82,32 @@ export default {
             message: "You need to accept the license and terms first",
           });
         } else {
-          $q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "cloud_done",
-            message: "Submitted",
-          });
+          (async () => {
+            const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/", {
+              username: name.value,
+              password: pass.value,
+              rol: "c",
+              randid: localStorage.getItem("randid"),
+            });
+            if( res.data.estado === 1){
+              localStorage.setItem("token",res.data.token)
+              window.location.href="#/administracion/panel"
+               $q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "done",
+              message: res.data.msg,
+            });
+            }else{
+               $q.notify({
+              color: "red-5",
+              textColor: "white",
+              icon: "warning",
+              message: res.data.msg,
+            });
+            }
+           
+          })();
         }
       },
 
@@ -102,6 +117,13 @@ export default {
         accept.value = false;
       },
     };
+  },   beforeCreate: async function () {
+       auth(this.$route.fullPath)
+    
+   
+  },
+    renderTriggered({ key, target, type }) {
+    console.log({ key, target, type })
   },
 };
 </script>

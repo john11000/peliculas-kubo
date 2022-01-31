@@ -25,17 +25,21 @@
         </h6>
         <q-input
           filled
-          v-model="name"
+          v-model.trim="name"
           label="Your username *"
-          title="please, put your username to log in"
+          title="please, put your username to log in, minimo 4 digitos"
           lazy-rules
-          :rules="[(val) => (val && val.length > 0) || 'Please type something']"
+           pattern="[A-Za-z]{4,40}"
+          :rules="[(val) => (val && val.length > 0)  || 'Please type something'
+           
+          ]"
+          
         />
 
         <q-input
           filled
           type="password"
-          v-model="age"
+          v-model.trim="pass"
           label="Your password *"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
           title="the password must be  sure, Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
@@ -43,17 +47,17 @@
           :rules="[
             (val) =>
               (val !== null && val !== '') || 'Please put your password ',
-            (val) =>
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/ ||
-              'the password is no sure',
+          
           ]"
         />
 
         <q-toggle v-model="accept" label="I accept the license and terms" />
 
         <div class="text-center">
-          <q-btn label="Login" type="submit" color="primary" />
+          <q-btn label="register" type="submit" color="primary" />
         </div>
+            <q-btn @click="$router.replace(`/login`)" flat rounded color="primary" label="ya tengo una cuenta" />
+
       </q-form>
     </div>
   </div>
@@ -62,22 +66,25 @@
 <script>
 import { useQuasar } from "quasar";
 import { ref } from "vue";
-
+import auth from "src/auth/index"
+import axios from "axios" 
 export default {
   setup() {
     const $q = useQuasar();
 
     const name = ref(null);
-    const age = ref(null);
+    const pass = ref(null);
     const accept = ref(false);
 
     return {
       name,
-      age,
+      pass,
       accept,
 
       onSubmit() {
         if (accept.value !== true) {
+
+
           $q.notify({
             color: "red-5",
             textColor: "white",
@@ -85,6 +92,35 @@ export default {
             message: "You need to accept the license and terms first",
           });
         } else {
+          
+
+          (async () => {
+            const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/register", {
+              username: name.value,
+              password: pass.value,
+              rol: "c",
+              randid: localStorage.getItem("randid"),
+            });
+            if( res.data.estado === 1){
+              localStorage.setItem("token",res.data.token)
+              window.location.href="#/administracion/panel"
+               $q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "done",
+              message: res.data.msg,
+            });
+            }else{
+               $q.notify({
+              color: "red-5",
+              textColor: "white",
+              icon: "warning",
+              message: res.data.msg,
+            });
+            }
+           
+          })();
+
           $q.notify({
             color: "green-4",
             textColor: "white",
@@ -96,11 +132,13 @@ export default {
 
       onReset() {
         name.value = null;
-        age.value = null;
+        pass.value = null;
         accept.value = false;
       },
     };
-  },
+  },  beforeCreate : function (){
+    auth(this.$route.fullPath)
+  }
 };
 </script>
 

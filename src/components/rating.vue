@@ -1,5 +1,6 @@
 <template>
   <div class=''>
+<span hidden>{{model =  val.calificacion}}</span>
     <q-rating
       v-model="model"
       max="5"
@@ -10,7 +11,6 @@
       icon-half="star_half"
       readonly
     />
-   
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     return {
       model: ref(Math.floor(Math.random() * (6 - 4.5)) + 3.5)
     }
-  },
+  }, props: ["val"]
   
 }
 </script>

@@ -5,6 +5,9 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
+  updated(){
+    console.log(window.location.pathname)
+  }
 })
 </script>
