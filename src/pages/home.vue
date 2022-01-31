@@ -32,7 +32,7 @@ export default defineComponent({
     };
   },
   beforeCreate: async function () {
-    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
+    const res = await axios.get("https://b-peliculas.herokuapp.com/");
     this.peliculas = res.data.peliculas;
     this.TodasPeliculas = res.data.peliculas;
     console.log(this.peliculas)

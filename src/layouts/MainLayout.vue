@@ -256,7 +256,7 @@ export default defineComponent({
     };
   },
   beforeCreate: async function () {
-    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias");
+    const res = await axios.get("https://b-peliculas.herokuapp.com/movies/categorias");
     this.busqueda = res.data.categorias;
     this.essentialLinks = res.data.categorias
   },

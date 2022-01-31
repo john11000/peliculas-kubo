@@ -12,7 +12,7 @@
     <q-card class="my-card q-ma-sm bg-dark text-white">
       <!-- <q-video :src="prop.trailer.replace(`watch?v=`,`embed/`).split(`&`)[0]" /> -->
       <q-img
-        :src="`https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/img/` + prop.caratula"
+        :src="`https://b-peliculas.herokuapp.com/img/` + prop.caratula"
         :ratio="4 / 3"
         width="20"
         loading="lazy"

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/";
+const baseUrl = "https://b-peliculas.herokuapp.com/";
 
 const auth =  async(path = "", $store) => {
   if (localStorage.getItem("token")) {

@@ -273,7 +273,7 @@ export default {
       data.append("categorias",this.categorias )
       data.append("trailer",this.trailerMovie )
 
-      const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/subir", data);
+      const res = await axios.post("https://b-peliculas.herokuapp.com/movies/subir", data);
       console.log(res);
       if(res.data.estado != 1){
         this.$q.notify({
@@ -306,7 +306,7 @@ export default {
     },
   },
   beforeCreate: async function () {
-    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias");
+    const res = await axios.get("https://b-peliculas.herokuapp.com/movies/categorias");
     console.log(res.data.categorias);
     this.options = res.data.categorias.map(
       (categoria) => categoria.id_categoria +" "+categoria.nombre_categoria 

@@ -5,7 +5,6 @@
       style="width: 400px"
     >
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-
         <h6 class="text-uppercase text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +48,13 @@
         <div class="text-center">
           <q-btn label="Login" type="submit" color="primary" />
         </div>
-            <q-btn @click="$router.replace(`/register`)" flat rounded color="primary" label="no tengo una cuenta" />
-
+        <q-btn
+          @click="$router.replace(`/register`)"
+          flat
+          rounded
+          color="primary"
+          label="no tengo una cuenta"
+        />
       </q-form>
     </div>
   </div>
@@ -60,7 +64,7 @@
 import { useQuasar } from "quasar";
 import { ref } from "vue";
 import axios from "axios";
-import  auth  from "src/auth/index"
+import auth from "src/auth/index";
 export default {
   setup() {
     const $q = useQuasar();
@@ -83,32 +87,36 @@ export default {
           });
         } else {
           (async () => {
-            const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/",headers: {
-    "Access-Control-Allow-Origin": "*"
-  }, {
+               let body = {
               username: name.value,
               password: pass.value,
               rol: "c",
               randid: localStorage.getItem("randid"),
+            };
+            const res = await axios.post("https://b-peliculas.herokuapp.com/users/", {
+              data :body
             });
-            if( res.data.estado === 1){
-              localStorage.setItem("token",res.data.token)
-              window.location.href="#/administracion/panel"
-               $q.notify({
-              color: "green-4",
-              textColor: "white",
-              icon: "done",
-              message: res.data.msg,
-            });
-            }else{
-               $q.notify({
-              color: "red-5",
-              textColor: "white",
-              icon: "warning",
-              message: res.data.msg,
-            });
+         console.log(res)
+      
+            if (res.data.estado === 1) {
+              localStorage.setItem("token", res.data.token);
+              window.location.href = "#/administracion/panel";
+              $q.notify({
+                color: "green-4",
+                textColor: "white",
+                icon: "done",
+                message: res.data.msg,
+              });
+            } else {
+              console.log(res.data);
+
+              $q.notify({
+                color: "red-5",
+                textColor: "white",
+                icon: "warning",
+                message: res.data.msg,
+              });
             }
-           
           })();
         }
       },
@@ -119,13 +127,12 @@ export default {
         accept.value = false;
       },
     };
-  },   beforeCreate: async function () {
-       auth(this.$route.fullPath)
-    
-   
   },
-    renderTriggered({ key, target, type }) {
-    console.log({ key, target, type })
+  beforeCreate: async function () {
+    auth(this.$route.fullPath);
+  },
+  renderTriggered({ key, target, type }) {
+    console.log({ key, target, type });
   },
 };
 </script>
