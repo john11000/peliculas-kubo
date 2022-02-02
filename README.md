@@ -1,8 +1,3 @@
-# tienda online 2.0 (tienda)
-
-http://soyanderson.com/#/
-
-la version actualizada de la anterior version de la tienda online
 
 ## Install the dependencies
 ```bash
@@ -26,5 +21,5 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
-# MinTic
+
 
