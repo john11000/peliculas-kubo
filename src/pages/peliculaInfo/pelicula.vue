@@ -167,7 +167,7 @@ export default defineComponent({
   mounted() {},
   components: {},
   watch: {
-   
+   caratula:function (){}
   },
   methods: {
     actualizar:  async function () {

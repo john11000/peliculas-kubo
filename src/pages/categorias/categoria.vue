@@ -31,9 +31,9 @@ export default defineComponent({
   },
   beforeCreate: async function () {
     auth(this.$route.fullPath);
-    const res = await axios.get("https://b-peliculas.herokuapp.com/");
+    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
     const catePeli = await axios.get(
-      "https://b-peliculas.herokuapp.com/movies/categorias/peliculas"
+      "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias/peliculas"
     );
     const isNoveda = function (fecha) {
       let fechaFin = new Date().getTime();
@@ -78,9 +78,9 @@ export default defineComponent({
   watch: {
     peliculas: async function () {
       auth(this.$route.fullPath);
-      const res = await axios.get("https://b-peliculas.herokuapp.com/");
+      const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
       const catePeli = await axios.get(
-        "https://b-peliculas.herokuapp.com/movies/categorias/peliculas"
+        "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias/peliculas"
       );
        const isNoveda = function (fecha) {
       let fechaFin = new Date().getTime();
