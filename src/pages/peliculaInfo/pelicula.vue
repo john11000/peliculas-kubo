@@ -70,7 +70,7 @@
         <q-card-section class="col-5 flex flex-center">
           <q-img
             class="rounded-borders"
-            :src="`https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/img/` + pelicula.caratula"
+            :src="`https://ej101.azurewebsites.net/img/` + pelicula.caratula"
           />
         </q-card-section>
       </q-card-section>
@@ -141,8 +141,8 @@ export default defineComponent({
     };
   },
   beforeCreate: async function () {
-    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
-    const historial = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/historial")
+    const res = await axios.get("https://ej101.azurewebsites.net/");
+    const historial = await axios.get("https://ej101.azurewebsites.net/movies/historial")
     this.pelicula = res.data.peliculas.filter(
       (p) => p.id_pelicula == this.$route.params.id
     )[0];
@@ -171,8 +171,8 @@ export default defineComponent({
   },
   methods: {
     actualizar:  async function () {
-    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
-    const historial = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/historial")
+    const res = await axios.get("https://ej101.azurewebsites.net/");
+    const historial = await axios.get("https://ej101.azurewebsites.net/movies/historial")
     this.pelicula = res.data.peliculas.filter(
       (p) => p.id_pelicula == this.$route.params.id
     )[0];
@@ -196,7 +196,7 @@ export default defineComponent({
       return moment(fecha).fromNow();
     },
     calificar: async function () {
-      const res = await axios.post("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/calificar", {
+      const res = await axios.post("https://ej101.azurewebsites.net/movies/calificar", {
         calificacion: this.myCalifiacion,
         id_usuario: JSON.parse(localStorage.getItem("usuario")).id_usuario,
         visto: "si",

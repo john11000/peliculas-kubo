@@ -94,7 +94,7 @@ export default {
               randid: localStorage.getItem("randid"),
             };
             const res = await axios(
-              "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/users/",
+              "https://ej101.azurewebsites.net/users/",
               {
                 method: "post",
                 data: body,

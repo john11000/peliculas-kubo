@@ -314,10 +314,10 @@ export default {
   },
   beforeCreate: async function () {
     auth(this.$route.fullPath, this.$store);
-    const res = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias");
-    const res2 = await axios.get("https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/");
+    const res = await axios.get("https://ej101.azurewebsites.net/movies/categorias");
+    const res2 = await axios.get("https://ej101.azurewebsites.net/");
     const categorias_peliculas = await axios.get(
-      "https://app-7c7abf18-8298-4713-a5f3-1861e51324b6.cleverapps.io/movies/categorias/peliculas"
+      "https://ej101.azurewebsites.net/movies/categorias/peliculas"
     );
     this.categorias_peliculas = categorias_peliculas.data.categorias_peliculas;
 
